@@ -4,8 +4,7 @@ use clap::{Arg, App};
 mod device;
 use device::Device;
 
-use std::fs::File;
-use std::io::prelude::Read;
+use std::fs;
 
 fn main() {
 
@@ -19,16 +18,15 @@ fn main() {
                                .takes_value(true))
                           .get_matches();
 
-    let mut frequencies = String::new();
-    File::open(matches.value_of("input")
-                      .unwrap())
-         .expect("input file not exists")
-         .read_to_string(&mut frequencies)
-         .expect("failed to read input file");
+    let frequencies_raw = fs::read_to_string(matches.value_of("input").unwrap()).expect("failed to read file");
+    let frequencies = frequencies_raw.split("\n")
+                                     .filter_map(|f| f.parse::<i32>().ok());
 
-    let device: Device = frequencies.split("\n")
-                                    .filter_map(|f| f.parse::<i32>().ok())
-                                    .fold(Device::new(0), |device, frequency| device.calibrate(frequency));
+     let mut device = Device::new();
+     while device.first_reached_twice().is_none() {
+         frequencies.clone().for_each(|frequency| device.calibrate(frequency));
+     }
 
     println!("Device frequency : {:?}", device.frequency());
+    println!("Device frequency reached twice: {:?}", device.first_reached_twice());
 }
