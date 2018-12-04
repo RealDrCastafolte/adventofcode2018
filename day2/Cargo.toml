@@ -1,0 +1,7 @@
+[package]
+name = "adventofcode2018_day2"
+version = "0.1.0"
+authors = ["realDrCastafolte"]
+
+[dependencies]
+clap = "2.32.0"
