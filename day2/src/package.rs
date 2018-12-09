@@ -19,6 +19,10 @@ impl Package {
         }
     }
 
+    pub fn id(&self) -> String {
+        self.id.clone()
+    }
+
     pub fn letter_appears_two_times(&self) -> bool {
         self.letters_count.values().any(|c| *c == 2)
     }
@@ -32,6 +36,12 @@ impl Package {
 mod tests {
 
     use super::Package;
+
+    #[test]
+    fn should_return_package_id() {
+        let package = Package::new(String::from("abcdef"));
+        assert_eq!(package.id(), "abcdef");
+    }
 
     #[test]
     fn should_have_no_letters_appearing_two_or_three_times() {

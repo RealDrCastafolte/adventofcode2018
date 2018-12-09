@@ -23,4 +23,5 @@ fn main() {
     let packages = packages_raw.split("\n").map(|id| Package::new(id.to_string()));
     let warehouse = Warehouse::new(packages.collect());
     println!("Checksum : {:?}", warehouse.checksum());
+    println!("Prototypes : {:?}", warehouse.prototypes());
 }
