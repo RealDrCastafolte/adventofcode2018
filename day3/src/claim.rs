@@ -16,7 +16,7 @@ impl Claim {
     }
 
     pub fn from(claim: &str) -> Option<Claim> {
-        let pattern = regex::Regex::new(r"#(\d{1,}) @ (\d{1,}),(\d{1,}): (\d{1,})x(\d{1,})").unwrap();
+        let pattern = regex::Regex::new(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)").unwrap();
         pattern.captures(claim).map(|capture| {
             let id = capture.get(1).unwrap().as_str().parse::<u32>().unwrap();
             let area_start_x = capture.get(2).unwrap().as_str().parse::<u32>().unwrap();
@@ -51,5 +51,10 @@ mod tests {
     fn should_build_a_2x2_claim_starting_from_5_5_with_id_3() {
         let claim = Claim::from("#3 @ 5,5: 2x2");
         assert_eq!(claim, Some(Claim::new(3, Rectangle::new(Point::new(5,5), 2,2))));
+    }
+
+    #[test]
+    fn when_invalid_claim_pattern_then_should_return_none() {
+        assert_eq!(Claim::from("invalid"), None);
     }
 }
