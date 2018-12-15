@@ -27,4 +27,5 @@ fn main() {
     let mut fabric = Fabric::new();
     claims.for_each(|claim| fabric.claim(claim));
     println!("Overlapping claims : {:?}", fabric.overlapping_claim_area());
+    println!("Valid claims : {:?}", fabric.valid_claim());
 }

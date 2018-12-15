@@ -3,7 +3,7 @@ extern crate regex;
 use point::Point;
 use rectangle::Rectangle;
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq,Debug)]
 pub struct Claim {
     pub id: u32,
     pub area: Rectangle

@@ -1,6 +1,6 @@
 use point::Point;
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq,Debug)]
 pub struct Rectangle {
     pub start: Point,
     pub width: u32,
