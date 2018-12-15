@@ -11,6 +11,7 @@ pub struct Claim {
 
 impl Claim {
 
+    #[allow(dead_code)]
     pub fn new(id: u32, area: Rectangle) -> Claim {
         Claim { id: id, area: area }
     }
