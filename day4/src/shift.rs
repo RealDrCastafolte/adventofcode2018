@@ -1,13 +1,13 @@
-use std::time::Instant;
+use chrono::NaiveDateTime;
 
-#[derive(Clone,Debug)]
+#[derive(PartialEq,Clone,Debug)]
 pub struct Shift {
-    start: Instant
+    start: NaiveDateTime
 }
 
 impl Shift {
 
-    pub fn new(start: Instant) -> Shift {
+    pub fn new(start: NaiveDateTime) -> Shift {
         Shift { start: start }
     }
 }
